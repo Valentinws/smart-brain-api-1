@@ -2,7 +2,7 @@ const Clarifai = require('clarifai');
 
 //You must add your own API key here from Clarifai. 
 const app = new Clarifai.App({
- apiKey: 'YOUR API KEY HERE' 
+  apiKey: '13ad5c4f763a44c8bb49f26438d33611'
 });
 
 
@@ -27,16 +27,16 @@ const handleApiCall = (req, res) => {
 const handleImage = (req, res, db) => {
   const { id } = req.body;
   db('users').where('id', '=', id)
-  .increment('entries', 1)
-  .returning('entries')
-  .then(entries => {
-    // If you are using knex.js version 1.0.0 or higher this now returns an array of objects. Therefore, the code goes from:
-    // entries[0] --> this used to return the entries
-    // TO
-    // entries[0].entries --> this now returns the entries
-    res.json(entries[0].entries);
-  })
-  .catch(err => res.status(400).json('unable to get entries'))
+    .increment('entries', 1)
+    .returning('entries')
+    .then(entries => {
+      // If you are using knex.js version 1.0.0 or higher this now returns an array of objects. Therefore, the code goes from:
+      // entries[0] --> this used to return the entries
+      // TO
+      // entries[0].entries --> this now returns the entries
+      res.json(entries[0].entries);
+    })
+    .catch(err => res.status(400).json('unable to get entries'))
 }
 
 module.exports = {
